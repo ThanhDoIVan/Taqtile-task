@@ -1,4 +1,5 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  // Отслеживание изменения ссылки
   if (changeInfo.url) {
     console.log(changeInfo.url);
     chrome.tabs.sendMessage(tabId, {
@@ -9,6 +10,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
 });
 
 chrome.webNavigation.onCommitted.addListener(details => {
+  // Отслеживание обновления страницы
   if (details.transitionType === 'reload') {
     setTimeout(() => {
       chrome.tabs.sendMessage(details.tabId, {

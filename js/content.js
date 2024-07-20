@@ -1,13 +1,15 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  // реагируем сообщение об изменении URL
-
   const extension = () => {
     setTimeout(() => {
       const slugs = document.querySelectorAll('.slug-wrap');
 
+      const latitude = 53.53;
+      const longtitude = 27.34;
+
+      // Получение данных о погоде в Минске
       const fetchWeatherAPi = () => {
         fetch(
-          'https://api.openweathermap.org/data/2.5/weather?lat=53.53&lon=27.34&appid=fd97a707a1212b3c1e75098d1837ef55',
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&appid=fd97a707a1212b3c1e75098d1837ef55`,
           {
             method: 'GET',
           }
@@ -32,12 +34,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           .catch(err => console.error(err));
       };
 
+      // Создание блока с текстовым сообщением
       const createWeatherTextbox = parentElem => {
         const weatherTextbox = document.createElement('div');
         weatherTextbox.classList.add('weather__textbox', 'none');
         parentElem.appendChild(weatherTextbox);
       };
 
+      // Создание кнопки на плашке с новостями
       const createWeatherButton = parentElem => {
         const weatherButton = document.createElement('div');
         weatherButton.classList.add('weather__btn');
@@ -57,16 +61,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         createWeatherButton(slugElem);
       });
     }, 2500);
-  }
+  };
 
-  if (request.message === 'url-changed') {
+  // Обработка сообщений полученных с service_worker
+  if (request.message === 'url-changed' || request.message === 'page-refreshed') {
     extension();
   }
-
-  if (request.message === 'page-refreshed') {
-    console.log('Получено сообщение "page-refreshed":', request.url);
-    extension();
-  }
-
 });
-
