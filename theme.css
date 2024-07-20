@@ -1,0 +1,65 @@
+:root {
+  --button-color: #ff0000;
+  --textbox-color: #fff1ee;
+  --font-color: #000000;
+}
+
+.slug-wrap {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  overflow: visible !important;
+}
+
+.post-type-minimal {
+  overflow: visible !important;
+}
+
+.weather__btn {
+  position: relative;
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.weather__btn::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  border: 3px solid var(--button-color);
+}
+
+.weather__btn::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  width: 2px;
+  height: 11px;
+  transform: rotate(45deg);
+  transform-origin: left bottom;
+  border-radius: 8px;
+  background: var(--button-color);
+}
+
+.weather__textbox {
+  position: relative;
+  top: calc(100% + 10px);
+  left: -85px;
+  z-index: 1;
+  width: 230px;
+  padding: 10px;
+  background-color: var(--textbox-color);
+  border: 1px solid var(--font-color);
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.none {
+  display: none;
+}

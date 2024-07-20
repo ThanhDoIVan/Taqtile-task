@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "nprWeather",
+  "version": "1.0.0",
+  "permissions": ["tabs", "activeTab", "scripting", "webNavigation", "nativeMessaging"],
+  "background": {
+    "service_worker": "./js/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.npr.org/*"],
+      "js": ["./js/content.js"],
+      "css": ["./theme.css"],
+      "runAt": "document_start"
+    }
+  ]
+}
